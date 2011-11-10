@@ -13,7 +13,11 @@
 	<artifactId>awayphysics</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>swc</packaging>
-
+	<scm>
+		<connection>scm:git:git://github.com:mindshapes/awayphysics-core-fp11.git</connection>
+		<developerConnection>scm:git:git://github.com:mindshapes/awayphysics-core-fp11.git</developerConnection>
+		<url>https://www.assembla.com/code/bootstrapper/git/nodes</url>
+	</scm>
 	<dependencies>
 		<dependency>
 			<groupId>com.adobe.flex.framework</groupId>
@@ -64,9 +68,9 @@
 				<configuration>
 					<coverage>false</coverage>
 					<configurationReport>true</configurationReport>
-					<debug>false</debug>
-					<omitTraceStatements>true</omitTraceStatements>
-					<verboseStacktraces>false</verboseStacktraces>
+					<debug>true</debug>
+					<omitTraceStatements>false</omitTraceStatements>
+					<verboseStacktraces>true</verboseStacktraces>
 					<optimize>true</optimize>
 					<swfVersion>13</swfVersion>
 				</configuration>
