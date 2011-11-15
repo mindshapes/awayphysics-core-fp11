@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>awayphysics</groupId>
 			<artifactId>bullet-alchemy</artifactId>
-			<version>0.2</version>
+			<version>0.3</version>
 			<type>swc</type>
 			<scope>external</scope>
 		</dependency>
