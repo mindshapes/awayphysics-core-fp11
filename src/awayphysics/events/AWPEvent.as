@@ -4,11 +4,15 @@ package awayphysics.events {
 
 	import flash.events.Event;
 
-	public class AWPCollisionEvent extends Event {
+	public class AWPEvent extends Event {
 		/**
 		 * Dispatched when the body occur collision
 		 */
-		public static const COLLISION_ADDED : String = "collisionStart";
+		public static const COLLISION_ADDED : String = "collisionAdded";
+		/**
+		 * Dispatched when ray collide
+		 */
+		 public static const RAY_CAST : String = "rayCast";
 		/**
 		 * stored which object is collide with target object
 		 */
@@ -18,7 +22,7 @@ package awayphysics.events {
 		 */
 		public var manifoldPoint : AWPManifoldPoint;
 
-		public function AWPCollisionEvent(type : String) {
+		public function AWPEvent(type : String) {
 			super(type);
 		}
 	}
