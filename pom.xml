@@ -7,9 +7,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>swc</packaging>
 	<scm>
-		<connection>scm:git:git://github.com:mindshapes/awayphysics-core-fp11.git</connection>
-		<developerConnection>scm:git:git://github.com:mindshapes/awayphysics-core-fp11.git</developerConnection>
-		<url>https://www.assembla.com/code/bootstrapper/git/nodes</url>
+		<connection>scm:git:file://.</connection>
+		<developerConnection>scm:git:file://.</developerConnection>
+		<url>scm:git:file://.</url>
 	</scm>
 	<properties>
 		<flex.sdk.version>4.5.1.21328</flex.sdk.version>
@@ -129,4 +129,14 @@
 			</build>
 		</profile>
 	</profiles>
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<url>http://mindshapes-nexus01.managed.contegix.com:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<url>http://mindshapes-nexus01.managed.contegix.com:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
