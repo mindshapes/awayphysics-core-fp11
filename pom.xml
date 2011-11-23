@@ -6,9 +6,8 @@
 	<version>0.0.2-SNAPSHOT</version>
 	<packaging>swc</packaging>
 	<scm>
-		<connection>scm:git:file://.</connection>
-		<developerConnection>scm:git:file://.</developerConnection>
-		<url>scm:git:file://.</url>
+		<connection>scm:git:git@github.com:mindshapes/awayphysics-core-fp11.git</connection>
+		<developerConnection>scm:git:git@github.com:mindshapes/awayphysics-core-fp11.git</developerConnection>
 	</scm>
 	<properties>
 		<flex.sdk.version>4.5.1.21328</flex.sdk.version>
