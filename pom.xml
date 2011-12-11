@@ -66,9 +66,9 @@
 				<configuration>
 					<coverage>false</coverage>
 					<configurationReport>true</configurationReport>
-					<debug>true</debug>
+					<debug>false</debug>
 					<omitTraceStatements>false</omitTraceStatements>
-					<verboseStacktraces>true</verboseStacktraces>
+					<verboseStacktraces>false</verboseStacktraces>
 					<optimize>true</optimize>
 					<swfVersion>13</swfVersion>
 				</configuration>
