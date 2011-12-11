@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>awayphysics</groupId>
 	<artifactId>awayphysics</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<packaging>swc</packaging>
 	<scm>
 		<connection>scm:git:git@github.com:mindshapes/awayphysics-core-fp11.git</connection>
@@ -116,7 +116,7 @@
 						<configuration>
 							<mappingId>customizable</mappingId>
 							<configurators>
-								<configurator id="org.maven.ide.eclipse.configuration.flex.configurator"/>
+								<configurator id="org.maven.ide.eclipse.configuration.flex.configurator" />
 							</configurators>
 							<mojoExecutions>
 								<mojoExecution> org.apache.maven.plugins:maven-resources-plugin::</mojoExecution>
