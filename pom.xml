@@ -66,9 +66,9 @@
 				<configuration>
 					<coverage>false</coverage>
 					<configurationReport>true</configurationReport>
-					<debug>false</debug>
+					<debug>true</debug>
 					<omitTraceStatements>false</omitTraceStatements>
-					<verboseStacktraces>false</verboseStacktraces>
+					<verboseStacktraces>true</verboseStacktraces>
 					<optimize>true</optimize>
 					<swfVersion>13</swfVersion>
 				</configuration>
@@ -116,11 +116,28 @@
 						<configuration>
 							<mappingId>customizable</mappingId>
 							<configurators>
-								<configurator id="org.maven.ide.eclipse.configuration.flex.configurator" />
+								<configurator id="org.maven.ide.eclipse.configuration.flex.configurator"/>
 							</configurators>
 							<mojoExecutions>
 								<mojoExecution> org.apache.maven.plugins:maven-resources-plugin::</mojoExecution>
 							</mojoExecutions>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>release_full</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.flexmojos</groupId>
+						<artifactId>flexmojos-maven-plugin</artifactId>
+						<version>${flexmojos.version}</version>
+						<configuration>
+							<debug>false</debug>
+							<omitTraceStatements>true</omitTraceStatements>
+							<verboseStacktraces>false</verboseStacktraces>
 						</configuration>
 					</plugin>
 				</plugins>
