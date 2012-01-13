@@ -3,7 +3,6 @@ package awayphysics.dynamics {
 
 	import awayphysics.collision.dispatch.AWPCollisionObject;
 	import awayphysics.collision.shapes.AWPCollisionShape;
-	import awayphysics.data.AWPCollisionFlags;
 	import awayphysics.math.AWPMatrix3x3;
 	import awayphysics.math.AWPVector3;
 	import awayphysics.math.AWPMath;
@@ -124,6 +123,15 @@ package awayphysics.dynamics {
 			}
 			m_gravity_acceleration.v3d = acceleration;
 		}
+		
+		override public function set scale(sc:Vector3D):void {
+			super.scale = sc;
+			bullet.setBodyMassMethod(pointer, mass);
+		}
+		override public function set transform(tr:Matrix3D) : void {
+			super.transform = tr;
+			bullet.setBodyMassMethod(pointer, mass);
+		}
 
 		public function get invInertiaTensorWorld() : Matrix3D {
 			return m_invInertiaTensorWorld.m3d;
@@ -190,25 +198,22 @@ package awayphysics.dynamics {
 		}
 
 		public function get mass() : Number {
-			return 1 / inverseMass;
+			return (inverseMass == 0)?0:1 / inverseMass;
 		}
 
 		public function set mass(v : Number) : void {
+			bullet.setBodyMassMethod(pointer, v);
+			var physicsWorld:AWPDynamicsWorld = AWPDynamicsWorld.getInstance();
 			if (v == 0) {
-				this.collisionFlags |= AWPCollisionFlags.CF_STATIC_OBJECT;
-				inverseMass = 0;
+				if (physicsWorld.nonStaticRigidBodies.indexOf(this) >= 0) {
+					physicsWorld.nonStaticRigidBodies.splice(physicsWorld.nonStaticRigidBodies.indexOf(this), 1);
+				}
 			} else {
-				this.collisionFlags &= (~AWPCollisionFlags.CF_STATIC_OBJECT);
-				inverseMass = 1 / v;
+				if (physicsWorld.nonStaticRigidBodies.indexOf(this) < 0) {
+					physicsWorld.nonStaticRigidBodies.push(this);
+				}
 			}
-
-			var vec : Vector3D = m_gravity_acceleration.v3d;
-			vec.scaleBy(v);
-			m_gravity.v3d = vec;
-
-			vec = m_linearFactor.v3d;
-			vec.scaleBy(inverseMass);
-			m_invMass.v3d = vec;
+			activate();
 		}
 
 		public function get inverseMass() : Number {

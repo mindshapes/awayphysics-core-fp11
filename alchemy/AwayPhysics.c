@@ -195,7 +195,7 @@ AS3_Val removeCompoundChild(void* data, AS3_Val args){
 	btCompoundShape* cshape;
 	int index;
 	AS3_ArrayValue(args, "PtrType,IntType",&cshape,&index);
-
+	
 	cshape->removeChildShapeByIndex(index);
 
 	return AS3_Null();
@@ -366,7 +366,7 @@ AS3_Val setShapeScaling(void* data, AS3_Val args){
 	double scaleX,scaleY,scaleZ;
 
 	AS3_ArrayValue(args, "PtrType,DoubleType,DoubleType,DoubleType",&shape,&scaleX,&scaleY,&scaleZ);
-
+	
 	shape->setLocalScaling(btVector3(scaleX,scaleY,scaleZ));
 
 	return AS3_Null();
@@ -382,7 +382,6 @@ AS3_Val createCollisionObject(void* data, AS3_Val args){
 	obj->setUserPointer(as3_Object);
 	
 	return_as3_ptr(obj);
-
 }
 AS3_Val addCollisionObject(void* data, AS3_Val args){
 	btCollisionObject* obj;
@@ -419,6 +418,7 @@ AS3_Val removeRay(void* data, AS3_Val args){
 	AS3_ArrayValue(args, "PtrType", &ray);
 	
 	rays.remove(ray);
+	delete ray;
 	
 	return AS3_Null();
 }
@@ -444,6 +444,32 @@ AS3_Val createBody(void* data, AS3_Val args){
 	body->setUserPointer(as3_Body);
 
 	return_as3_ptr(body);
+}
+
+AS3_Val setBodyMass(void* data, AS3_Val args){
+	btRigidBody* body;
+	double mass;
+	
+	AS3_ArrayValue(args, "PtrType,DoubleType",&body,&mass);
+	
+	btCollisionShape* shape=body->getCollisionShape();
+	bool isDynamic = (mass != 0.f);
+	btVector3 localInertia(0,0,0);
+	if (isDynamic)
+		shape->calculateLocalInertia(mass,localInertia);
+		
+	body->setMassProps(mass, localInertia);
+	body->updateInertiaTensor();
+	
+	btDiscreteDynamicsWorld* dynamicsWorld = (btDiscreteDynamicsWorld*)collisionWorld;
+	if(dynamicsWorld->getCollisionObjectArray().findLinearSearch(body) != dynamicsWorld->getNumCollisionObjects()){
+		short int group = body->getBroadphaseHandle()->m_collisionFilterGroup;
+		short int mask = body->getBroadphaseHandle()->m_collisionFilterMask;
+		dynamicsWorld->removeRigidBody(body);
+		dynamicsWorld->addRigidBody(body,group,mask);
+	}
+	
+	return AS3_Null();
 }
 
 //add the body to the dynamics world
@@ -825,7 +851,7 @@ AS3_Val removeVehicle(void* data, AS3_Val args){
 
 	btDiscreteDynamicsWorld* dynamicsWorld=(btDiscreteDynamicsWorld*)collisionWorld;
 	dynamicsWorld->removeVehicle(vehicle);
-
+	
 	return AS3_Null();
 }
 
@@ -1021,6 +1047,7 @@ int main() {
 	AS3_Val addRayMethod = AS3_Function( NULL, addRay );
 	AS3_Val removeRayMethod = AS3_Function( NULL, removeRay );
 	AS3_Val createBodyMethod = AS3_Function( NULL, createBody );
+	AS3_Val setBodyMassMethod = AS3_Function( NULL, setBodyMass );
 	AS3_Val addBodyWithGroupMethod = AS3_Function( NULL, addBodyWithGroup );
 	AS3_Val addBodyMethod = AS3_Function( NULL, addBody );
 	AS3_Val removeBodyMethod = AS3_Function( NULL, removeBody );
@@ -1076,6 +1103,7 @@ int main() {
 								 "addRayMethod:AS3ValType,"
 								 "removeRayMethod:AS3ValType,"
 								 "createBodyMethod:AS3ValType,"
+								 "setBodyMassMethod:AS3ValType,"
 								 "addBodyWithGroupMethod:AS3ValType,"
 								 "addBodyMethod:AS3ValType,"
 								 "removeBodyMethod:AS3ValType,"
@@ -1131,6 +1159,7 @@ int main() {
 								 addRayMethod,
 								 removeRayMethod,
 								 createBodyMethod,
+								 setBodyMassMethod,
 								 addBodyWithGroupMethod,
 								 addBodyMethod,
 								 removeBodyMethod,
@@ -1186,6 +1215,7 @@ int main() {
 	AS3_Release( addRayMethod );
 	AS3_Release( removeRayMethod );
 	AS3_Release( createBodyMethod );
+	AS3_Release( setBodyMassMethod );
 	AS3_Release( addBodyWithGroupMethod );
 	AS3_Release( addBodyMethod );
 	AS3_Release( removeBodyMethod );

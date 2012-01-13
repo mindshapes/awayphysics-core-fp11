@@ -470,8 +470,8 @@ package awayphysics.debug
 				var triangleMesh:AWPBvhTriangleMeshShape = shape as AWPBvhTriangleMeshShape;
 				drawTriangles(triangleMesh.geometry, triangleMesh.localScaling, transform, color);
 			}else if (shape.shapeType == AWPCollisionShapeType.HEIGHT_FIELD_TERRAIN) {
-				var terrain:AWPHeightfieldTerrainShape = shape as AWPHeightfieldTerrainShape;
-				drawTriangles(terrain.geometry, terrain.localScaling, transform, color);
+				//var terrain:AWPHeightfieldTerrainShape = shape as AWPHeightfieldTerrainShape;
+				//drawTriangles(terrain.geometry, terrain.localScaling, transform, color);
 			}
 		}
 		
