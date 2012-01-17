@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>awayphysics</groupId>
 	<artifactId>awayphysics</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<packaging>swc</packaging>
 	<scm>
 		<connection>scm:git:git@github.com:mindshapes/awayphysics-core-fp11.git</connection>
