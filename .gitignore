@@ -5,3 +5,5 @@
 /target
 /.actionScriptProperties
 /.flexLibProperties
+html-template
+*.iml
