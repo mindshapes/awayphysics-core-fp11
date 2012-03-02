@@ -43,8 +43,8 @@
 		</dependency>
 		<dependency>
 			<groupId>away3d</groupId>
-			<artifactId>away3d-broomstick</artifactId>
-			<version>0.0.4-SNAPSHOT</version>
+			<artifactId>away3d</artifactId>
+			<version>4.0-beta</version>
 			<type>swc</type>
 			<scope>external</scope>
 		</dependency>
